@@ -20,7 +20,7 @@ using namespace std ;
 
     int npr_value(int n , int r ){
     if (n>0 && r>=0 && n>=r) 
-        return factorial_value(n)*factorial_value(n-r);
+        return factorial_value(n)/factorial_value(n-r);
     else { cout<<"Sorry ! cant calculate npr value for the given values \n";
         return 0;
     }
