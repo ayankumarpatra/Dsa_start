@@ -13,6 +13,8 @@ int gcd_finder(int a, int b){
             gcd=i;
     }
     /*
+    or instead of ternary operator we can use min (a,b)
+    or the loop part we can reverse like (int i=max;i<=1;i--)
     or Eukledian approach for less time complexity ..
         while (b != 0) {
         int temp = b;
