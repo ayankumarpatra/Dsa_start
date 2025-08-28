@@ -53,14 +53,30 @@ class Linkedlist {
     }
 
     void InsertAtPos(int pos,int val){
-        if (size<pos){
+        if (pos<1 || pos>size+1){
             cout<<"invalid position to insert ";
+            return;
         }
-        if (size==pos){
+        if (pos==size+1){
             AddAtTail(val);
+            return;
         }
-        if (size==0 || pos==1){
+        if (pos==1){
             AddAtHead(val);
+            return;
+        }
+        else {
+            Node*temp = new Node(val);
+            Node*prev=head;
+            Node*tempafter;
+            for (int i=1;i<pos-1;i++){
+                prev=prev->next;
+
+            }
+            temp->next=prev->next;
+            prev->next=temp;
+            size++;
+
         }
     }
 
@@ -91,5 +107,7 @@ int main (){
     ll.AddAtTail(99);
     ll.display();
 
+    ll.InsertAtPos(2,1234);
+    ll.display();
     return 0;
 }
