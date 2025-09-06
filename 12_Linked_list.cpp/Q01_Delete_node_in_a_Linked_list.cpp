@@ -29,6 +29,21 @@ void DelByValue (int value){
         cout<<"cant delete from an empty node";
     }
     Node*temp=head;
+
+    if(temp->val==value && size==1){
+        head=NULL;
+        delete(temp);
+        size--;
+        return;
+    }
+        
+    if(temp->val==value){
+        head=temp->next;
+        delete(temp);
+        size--;
+        return;
+    }
+
     int found=0;
     while(temp){
         if(temp->next->val==value){
@@ -40,10 +55,51 @@ void DelByValue (int value){
     if (found){
     Node*temp2 =temp->next->next;
     temp->next=temp2;  
+    size--;
     }
     else {
         cout<<"Not found";
     }
+    // code runs if the value present , else it throws error , will check later 
+
+}
+
+void DelHead(){
+    Node*temp=head;
+    if(size==0){
+        cout<<"Cant delete empty node\n";
+        return;
+    }
+    if(size==1){
+        head=NULL;
+        delete(temp);
+        size--;
+        return;
+    }
+    head=head->next;
+    delete(temp);
+    size--;
+}
+
+void DelEnd(){
+    Node*temp=head;
+    if(size==0){
+        cout<<"Cant delete empty node\n";
+        return;
+    }
+    if(size==1){
+        head=NULL;
+        delete(temp);
+        size--;
+        return;
+    }
+    while(temp->next->next){
+        temp=temp->next;
+    }
+    Node*delnode=temp->next;
+    delete(delnode);
+    temp->next=NULL;
+    size--;
 
 }
 
@@ -51,6 +107,19 @@ void DelByValue (int value){
 void DelByIndex(int index){
     if (size==0){
         cout<<"cant delete from an empty node";
+        return;
+    }
+    if (index>size+1){
+        cout<<"Invalid position to delete";
+        return;
+    }
+    if (index==1){
+        DelHead();
+        return;
+    }
+    if(index==size){
+        DelEnd();
+        return;
     }
     Node*temp=head;
     int pos=1;
@@ -108,13 +177,9 @@ int main (){
     ll.DelByValue(40);
     ll.display();
 
+    ll.DelByIndex(1);
+    ll.display();
 
 
     return 0;
 }
-
-/*
-
-
-Describe scenarios where using useCallback and useMemo hooks are crucial for performance and explain their underlying mechanisms.
-*/
