@@ -10,7 +10,17 @@ using namespace std ;
 class Solution {
 public:
     void rotate(vector<int>& nums, int k) {
-        
+        int temp=k,nextemp=nums.size()-k,i=0;
+        vector<int> tempv(k);
+        while (temp-->0)
+        {
+            tempv[i]=nums[nums.size()-i];
+        }
+        while (nextemp-->0)
+        {
+            tempv[i]=nums[k++];
+        }       
+        nums= tempv;
     }
 };
 
