@@ -13,10 +13,30 @@ using namespace std ;
 void FillWithGreaterElements (int arr[] , int Array_size){
     stack <int> st;
     int GreaterArray[Array_size],i=0;
-    GreaterArray[Array_size-i]=-1;
+    GreaterArray[Array_size-i-1]=-1;
     st.push(arr[Array_size-i]);
-    for(i=1;i<Array_size;i++){
-        GreaterArray[Array_size-i]=-1;
+    for(i=Array_size-2;i>=0;i--){
+       //step 1 . pop all the elements smaller than arr[i]
+       while (st.size()>0 && st.top()<=arr[i])
+       {
+       st.pop();
+       }
+       // step 2 . mark the ans in next greater element array 
+       //1. if size 0 , meeans all em removed , put -1 in that place 
+       if(st.size()==0) GreaterArray[i]=-1;
+       //2. if size not 0 , means the remaining element is greater than the current element 
+       else GreaterArray[i]=st.top();
+       //step 3. push the current element in stack;
+       st.push(arr[i]);
+
+       /*
+       means 2 thing to remember 
+       1. you have to travarse the array in reverse order
+       2. main operations are 1. pop till any greater element found
+                              2. if stack size still not 0 , put that top ans in the greater array 
+                              else put -1 in that greater array place 
+                              3. push only the current element in the stack        
+       */
         
     }
     
