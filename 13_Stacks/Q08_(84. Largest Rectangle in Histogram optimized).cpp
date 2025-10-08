@@ -6,7 +6,7 @@ using namespace std ;
 
 /*
 
-calculate next and previous greater or equal array length and add them up
+we can calculate next and previous greater or equal array length and add them up
 
 so alternatively we will do check 
 1. prev or next smaller element and travarse till we get any smaller element 
@@ -25,30 +25,47 @@ so alternatively we will do check
 
 
 int MaxAreaFinder(vector<int> Main_Vector){
-    vector <int> MaxPossibleArea;
-    vector <int> PrevGreater;
-    vector <int> NextGreater;
-    int Maxchecker,Minchecker,MaxArea,Vector_size=Main_Vector.size(),Element_Counter;
-    stack <int> Maxstack , MinStack;
-    Maxstack.push(Main_Vector[Vector_size-1]);
-        for (int i=1;i<Main_Vector.size();i++){
-            Maxchecker=Vector_size-i-1;
-            Minchecker=i;
-            Element_Counter=0;
-
-        while (!Maxstack.empty() && Maxchecker!=i && Maxstack.top()<=Main_Vector[i])
+    // first calculating right smaller elements Aray
+    if (Main_Vector.size()==0){
+        return 0;
+    }
+    else if (Main_Vector.size()==1){
+        return Main_Vector[0];
+    }
+    stack <int> Right_stack;
+    vector<int> Right_Smaller(Main_Vector.size(),0);
+    int i;
+    for(i=Main_Vector.size()-1;i>=0;i--){
+        while (Right_stack.size()>0 && Main_Vector[Right_stack.top()]>=Main_Vector[i])
         {
-        Maxstack.pop();
-        Element_Counter++;
+            Right_stack.pop();
         }
+        Right_Smaller[i]=Right_stack.size()==0?Main_Vector.size():Right_stack.top();
+        Right_stack.push(i);
         
-                    
+    }
 
-            
+    // now calculating left smaller elements array and max area both
+    // thinking to create a array similarly for left also , but think instead of wasting space , create a
+    //temporary element and do work on it , space saved for extra elements 
+
+    int Temp_Arr_Value,Width,Temparea,Maxarea=0;
+    stack <int> Left_Smaller_Stack;
+    for(i=0;i<Main_Vector.size();i++){
+        while (Left_Smaller_Stack.size()>0 && Main_Vector[Left_Smaller_Stack.top()]>=Main_Vector[i])
+        {
+            Left_Smaller_Stack.pop();
         }
+        Temp_Arr_Value=Left_Smaller_Stack.size()==0?-1:Left_Smaller_Stack.top();
+        Width=Right_Smaller[i]-Temp_Arr_Value-1;
+        Temparea=Width*Main_Vector[i];// width * height in main arr
+        Maxarea=Temparea>Maxarea?Temparea:Maxarea;
 
-        NextGreater[Vector_size-1]=0;// No max element possible after the last index 
-        PrevGreater[0]=0;//No previous greater possible 
+        Left_Smaller_Stack.push(i);
+    }
+
+    return Maxarea;
+
 }
 
 int main (){
