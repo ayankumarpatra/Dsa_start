@@ -24,27 +24,6 @@ class Linkedlist {
     }
 };
 
-void InsertAtHead(ListNode *&head ,int &size,int val){
-    ListNode *temp= new ListNode(val);
-    temp->next=head;
-    head=temp;
-    size++;
-}
-
-
-void display (ListNode *head){
-    if (head==NULL){
-        cout<<"Empty list , nothing to print \n";
-        return;
-    }
-    ListNode *temp=head;
-    while(temp){
-        cout<<temp->val<<" ";
-        temp=temp->next;
-    }
-    cout<<endl;
-}
-
 class Solution {
 public:
     vector<vector<int>> spiralMatrix(int m, int n, ListNode* head) {
