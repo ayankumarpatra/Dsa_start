@@ -28,7 +28,7 @@ public:
         else if (list2==NULL){return list1;}
 
         while (list1!=NULL && list2!=NULL)
-        {
+        { 
             if(list1->val<=list2->val){
                 Resultnode->next=list1;
                 list1=list1->next;
