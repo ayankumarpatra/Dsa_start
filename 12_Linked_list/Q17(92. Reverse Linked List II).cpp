@@ -16,26 +16,32 @@ class ListNode {
 class Solution {
 public:
     ListNode* reverseBetween(ListNode* head, int left, int right) {
-        if(head==NULL || left==right){
+        if(head==NULL || left==right || head->next==NULL){
             return head;
         }
+        ListNode* temp=new ListNode(-1);
+        temp->next=head;
 
-        int i;
-        ListNode*LeftLastNode=head;
-        for(i=1;i && LeftLastNode->next!=NULL ;i++){
-            LeftLastNode=LeftLastNode->next;
-            if(i+1==left){
-                break;
-            }
+        ListNode* prev=temp;
+
+        int i=1;
+        for(i;i<left;i++){
+            prev=prev->next;
         }
-        ListNode*Midnode=LeftLastNode->next;
-        ListNode*Midnodeconnector
-        while (Midnode!=NULL)
-        {
-            /* code */
+
+        ListNode* curr =prev->next;
+        ListNode* next=NULL;
+
+        for(i=left;i<right;i++){
+            next=curr->next;
+            curr->next=next->next;
+            next->next=prev->next;
+            prev->next=next;
         }
-        
+
+        return temp->next;
     }
+
 };
 
 
