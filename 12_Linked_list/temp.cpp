@@ -74,7 +74,6 @@ int main (){
 }
 
 
-*/
 
 #include<iostream>
 using namespace std ;
@@ -83,7 +82,7 @@ class Node {
     public:
         int val;
         Node* next;
-    Node(int value){
+        Node(int value){
         val=value;
         next=NULL;
     }
@@ -91,15 +90,15 @@ class Node {
 
 class LinkedList{
     public:
-        Node* head;
-        Node* tail;
-        int size;
+    Node* head;
+    Node* tail;
+    int size;
     LinkedList(){
         head=NULL;
         tail=NULL;
         size=0;
     }
-
+    
     void AddAtTail(int val){
         if(size==0){
             Node* temp =new Node(val);
@@ -113,7 +112,7 @@ class LinkedList{
             size++;
         }
     }
-
+    
     void display(){
         if(size==0){
             cout<<"empty list\n";
@@ -123,20 +122,20 @@ class LinkedList{
         Node* temp=head;
         while (temp!=NULL)
         {
-        cout<<temp->val<<" ";
-        temp=temp->next;
+            cout<<temp->val<<" ";
+            temp=temp->next;
         }
         cout<<endl;
     }
-
+    
     void reverse(){
         // i will try both approach 
         // ithink iteration will be faster than recursion based
-
+        
         // travarsal
         if (head==NULL || head->next==NULL)
         {
-        return;
+            return;
         }
         
         Node* ReverseHead=head;
@@ -144,10 +143,10 @@ class LinkedList{
         ReverseHead->next=NULL;
         while (head!=NULL)
         {
-        Node*temp=head;
-        head=head->next;
-        temp->next=ReverseHead;
-        ReverseHead=temp;
+            Node*temp=head;
+            head=head->next;
+            temp->next=ReverseHead;
+            ReverseHead=temp;
         }
         head= ReverseHead;
         
@@ -170,6 +169,86 @@ int main (){
     ll.display();
     ll.reverse();
     ll.display();
+    
+    return 0;
+}
+*/
+
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std ;
+
+class ListNode {
+    public :
+    int val;
+    ListNode *next;
+
+    ListNode (int val){
+        this ->val=val;
+        this->next=NULL;
+    }
+};
+
+class Solution {
+public:
+    ListNode* ReverseList(ListNode* MainList){
+        if(MainList==NULL || MainList->next==NULL){
+            return MainList;
+        }
+        ListNode* Reversehead=MainList;
+        ListNode*temp;
+        MainList=MainList->next;
+        Reversehead->next=NULL;
+
+        while (MainList!=NULL)
+        {
+        temp=MainList;
+        MainList=MainList->next;
+        temp->next=Reversehead;
+        Reversehead=temp;
+        }
+
+        return Reversehead;
+        
+
+    }
+
+
+    bool isPalindrome(ListNode* head) {
+        if(head==NULL || head->next==NULL){
+            return true;
+        }
+        ListNode* slow=head;
+        ListNode* fast=head;
+        ListNode* prev=NULL;
+
+        while (fast!=NULL && fast->next!=NULL)
+        {
+        prev=slow;
+        slow=slow->next;
+        fast=fast->next->next;
+        }
+        // now slow is the mid;
+        prev->next=NULL;
+
+        slow=ReverseList(slow);
+
+        while (slow!=NULL && head!=NULL)
+        {
+        if(head->val!=slow->val){
+            return false;
+        }
+        head=head->next;
+        slow=slow->next;
+        }
+       return true; 
+    }
+};
+
+
+int main (){
+
 
     return 0;
 }
