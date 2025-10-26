@@ -242,6 +242,58 @@ class DoublyLinkedList{
     }
 
 
+
+    //get value (head , tail , index )
+
+    int GetHead_Value(){
+        if(size==0){
+            cout<<"Empty list , cant fetch value \n";
+            return -1;
+        }
+        return head->val;
+    }
+    
+    int GetTail_Value(){
+        return tail->val;
+        
+    }
+    
+    int GetIndex_Value(int index){
+        if(index<0 || index>=size){
+            cout<<"Invalid Index , cant fetch value \n";
+            return -1;
+        }
+        else {
+            Node * curr=head;// Note i writeen on the base of indexing start with 0 , if user think index start from 1 , code will be
+            // little diff just make the function code index= index -1 , as code enviornment cant start index from 1 
+            for(int i=0;i<index;i++){
+                curr=curr->next;
+            }
+            return curr->val;
+        }
+        
+    }
+    
+    // display
+    
+    void Display(){
+        if(size==0){
+            cout<<"Empty list , cant fetch value \n";
+            return;
+        }
+        else {
+            Node * curr=head;
+            while (curr!=NULL)
+            {
+            cout<<curr->val<<" ";
+            }
+            cout<<endl;
+            
+        }
+        
+    }
+
+
 };
 
 
