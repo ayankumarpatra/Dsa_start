@@ -17,41 +17,61 @@ class Solution {
 public:
 
     ListNode* reverseEvenLengthGroups(ListNode* head) {
-        int Range=1,curlen;
+        if(head==NULL || head->next==NULL){
+            return head;
+        }
 
-        ListNode*curr =head;
-        ListNode*Temphead;
-        ListNode*prev;
-        ListNode*next;
-        ListNode*temp;
-        ListNode*Firstnode;
-
+        
+        ListNode*curr=head;
+        ListNode*Prev_tail=NULL;
+        int grouplen=1;
+        
         while (curr!=NULL)
         {
-            curlen=0;
-            for(int i=0;i<Range;i++){
-                curlen++;
+            ListNode* Group_start=curr;
+            int currlen=0;
+
+            ListNode * temp=curr;
+            while(currlen<grouplen && temp!=NULL ){
+                currlen++;
+                temp=temp->next;
             }
-            Firstnode=curr;
-            curr=curr->next;
-            prev=curr;
-            curr=curr->next;
 
-            if (curlen%2==0){
-                while (curlen-->0)
-                {
-                    next=curr->next;
-                    curr->next=prev;
+            ListNode* Next_group=temp;
 
-                    cur
+            if(currlen%2==0){
+               ListNode* prev=Next_group;
+               ListNode* Curr_node=Group_start;
+
+                for(int i=0;i<grouplen;i++){
+                    ListNode* Next_temp =Curr_node->next;
+                    Curr_node->next=prev;
+
+                    prev=Curr_node;
+                    Curr_node=Next_temp;
                 }
                 
+                if(Prev_tail!=NULL){
+                    Prev_tail->next=prev;
+                }
+                else{
+                    head=prev;
+                }
+
+                Prev_tail=Group_start;
+                
             }
-            prev=curr;
-            curr=curr->next;
-        }
-        
+            else {
+                Prev_tail=Group_start;
+                for(int i=1;i<currlen;i++){
+                    Prev_tail=Prev_tail->next;
+                }
+            }
+            curr=Next_group;
+            grouplen++; 
     }
+    return head;
+}
 };
 
 
