@@ -57,7 +57,19 @@ queue vs stack
     not any pre defined function , but yes 
 
     1. store size variable anywhere 
-    2. just 
+    2. just use a for loop to print the front elements 
+    3. pop the elemnt and push it back again
+
+
+
+
+    reverse a queue 
+
+    just use a stack 
+
+    pop from queue and push in stack till queue empty 
+
+    and re fill the queue till stack empty 
 */
 
 
