@@ -36,11 +36,15 @@ queue vs stack
     size , empty 
     back
 
-
+*************************
 
     push / insertion is done at back 
 
     pop in normal queue only happens at front 
+
+***************************
+
+
 
     font/top we can access front at o(1)
     back also can be accessed at 0(1)
