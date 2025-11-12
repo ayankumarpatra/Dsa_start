@@ -58,6 +58,22 @@ class Queue {
 };
 
 
+/*
+class Queue{
+
+public :
+int front,back;
+int arr[5];// using totally fixed array or you may use vectors 
+
+// eg 
+vector<int> arr;
+
+in constructor 
+r
+
+};
+*/  
+
 int main (){
 
     int qlen;
@@ -79,3 +95,11 @@ int main (){
     
     return 0;
 }
+
+/*
+
+problems in array implementaion of queue
+
+1. wastage of space 
+
+*/
