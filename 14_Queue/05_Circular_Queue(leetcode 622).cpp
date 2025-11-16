@@ -13,67 +13,65 @@ pop front        push back
 class MyCircularQueue {
 public:
     int front,back,maxsize,size;
-    bool frontfilled=false;
     int * arr;
     MyCircularQueue(int k) {
         front=back=0;
-        int array[k];
-        arr=array;
+        arr=new int[k];
         maxsize=k;
         size=0;
     }
     
     bool enQueue(int value) {//push back
-        if(size==maxsize && frontfilled){
+        if(size==maxsize){// size will handle the back=front case 
             return false;
         }
-        else if(!frontfilled){
-            if(back>maxsize && front!=0){
-                back=0;
-                frontfilled=false;
-            }
-            else if (back<front && front!=0){
-                frontfilled=false;
-            }
-            frontfilled=true;
+        arr[back]=value;
+        back++;
+        if(back==maxsize){
+            back=0;
         }
-        if(!frontfilled || (size<maxsize && back<maxsize) ){
-            arr[back]=value;
-            back++;
-            size++;
-        }
+        size++;
+        return true;
     }
     
     bool deQueue() {//pop front
         if(size==0){
             return false;
         }
-        
+        front++;
+        if(front==maxsize){
+            front=0;
+        }
+        size--;
+        return true;      
     }
     
     int Front() {
         if(size==0){
             return -1;
         }
-        return arr[back-1];
+        return arr[front];
     }
     
     int Rear() {
         if(size==0){
             return -1;
         }
-        return arr[front];  
+        else if(back==0){
+            return arr[maxsize-1];
+        }
+        return arr[back-1];  
     }
     
     bool isEmpty() {
         if(size==0){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
     
     bool isFull() {
-        if(front==back){
+        if(size==maxsize){
             return true;
         }    
         return false;
