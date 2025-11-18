@@ -29,7 +29,9 @@ public:
         st.pop();
 
         toremove=helper.size();
-        //for(int i=0;i<
+        for(int i=0;i<toremove;i++){
+            
+        }
 
     }
     
