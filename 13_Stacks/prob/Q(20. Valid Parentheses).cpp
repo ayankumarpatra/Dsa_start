@@ -22,12 +22,11 @@ public:
             return true;
         }
 
-        int lastindex=s.length();
         stack<char> st;
 
-        for(int i=0;i<lastindex;i++){
-            if(s[i]=='(' || s[i]=='{' || s[i]=='['){
-                st.push(s[i]);
+        for(char c:s ){
+            if(c=='(' || c=='{' || c=='['){
+                st.push(c);
             }
 
             else {
@@ -35,13 +34,12 @@ public:
                     return false;
                 }
 
-                else if (s[i]==')' || s[i]=='}' || s[i]==']'){
-                if(st.size()>0){
-                if( (st.top()=='(' && s[i]==')') || (st.top()=='{' && s[i]=='}')  ||(st.top()=='[' && s[i]==']') ){
+                if( (st.top()=='(' && c==')') || (st.top()=='{' && c=='}')  ||(st.top()=='[' && c==']') ){
                     st.pop();
                 }
-            }
-            }
+                else {
+                    return false;
+                }       
         }
     }
         if(st.size()==0){
