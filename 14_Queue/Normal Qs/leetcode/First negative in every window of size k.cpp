@@ -1,24 +1,40 @@
 #include<iostream>
 #include<deque>
 #include<vector>
-#include<climits>
 
 using namespace std ;
 
 class Solution {
 public:
-    vector<int> shortestSubarray(vector<int>& nums, int k) {
-    deque<int> q;
-    vector<int> v;
+    vector<int> shortestSubarray(vector<int>& v, int k) {
 
-    if(nums.size()<k){
-        v.push_back(-1);
-        return v;
-    }
-    
-    
+    vector<int> returnvector;
 
+    if(v.size()<k){
+        return returnvector;
     }
+
+    deque<int> dq;
+
+    for(int i=0;i<v.size();i++){
+        if (v[i]<0){
+            dq.push_back(v[i]);
+        }
+
+        if((i+1)%k==0){
+            if(dq.size()>0){
+                returnvector.push_back(dq.front());
+                dq.pop_front();
+            }
+            else {
+                returnvector.push_back(-1);
+            }
+        }
+    }
+
+    return returnvector;
+
+}
 };
 
 
