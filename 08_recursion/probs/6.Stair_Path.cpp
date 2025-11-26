@@ -1,46 +1,32 @@
-// calculate a^b and return value 
-
 #include<iostream>
 
 using namespace std ;
+/*
 
+a person is starting from ground , theres n no of stairs (take user in) , the person can move min 1 or max 2 steps at a time , at a single step 
+return the number of combinations possible to reach the top from ground
 
-int calculate_Power(int num,int power){
+*/
+int StairPathComb(int length){// it will be like a fibonaachi series 
 
-    if(power==0){
-        return 1;
-    }
+    if(length==2){ return 2;}
+    if(length==1){ return 1;}
 
-    else if(power==1){
-        return num;
-    }
-
-    int ans = calculate_Power(num,power/2);
-
-    if(power%2==0){
-
-        return ans*ans;
-    }
-
-    else if(power%2!=0){
-        return num*ans*ans;
-    }
-
-    return 0;
+    return StairPathComb(length-1)+StairPathComb(length-2);
 }
+
 
 int main (){
 
-    int num,power;
+    int Stairs;
+    cout<<"Enter No of stairs : ";
+    cin>>Stairs;
 
-    cout<<"Enter NUmber : ";
-    cin>>num;
-    
-    cout<<"Warning ! This version only works for positive and non negetive integer power \n";
-    cout<<"Enter Power accordingly : ";
-    cin>>power;
+    if(Stairs<=0){
+        cout<<"Invalid input please try again \n";
+        return 0;
+    }
 
-    cout<<num<<"^"<<power<<" = "<<calculate_Power(num,power);
-
+    cout<<"No of ways we can get into top is : "<<StairPathComb(Stairs);
     return 0;
 }
