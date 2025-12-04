@@ -7,8 +7,8 @@ void PrintSubsets(const vector<int> &mainvector, vector<int> &subvector,int i=0)
     if (i==mainvector.size()){
         cout<<"{";//basecase
         for (int x : subvector) cout<<x<<" ";
-        cout<<"}";
-
+        cout<<"}\n";
+        return;
     } 
     //
     subvector.push_back(mainvector[i]);
