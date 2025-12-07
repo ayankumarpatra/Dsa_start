@@ -9,8 +9,7 @@ void Print_Subset(vector<int> mainset,vector <int> subset,int i=0){
         for (int element : subset){
             cout<<element<<" ";
         }
-        cout
-        <<"} \n";
+        cout<<"} \n";
         return;
     }
 
