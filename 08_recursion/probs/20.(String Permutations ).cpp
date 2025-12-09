@@ -1,6 +1,7 @@
 // find all the permutations of a given string where all the elements are unique 
 
 #include<iostream>
+#include<vector>
 using namespace std ;
 
 void Generate_Permutations (string &mainstring,string &current,vector <bool> &used){
