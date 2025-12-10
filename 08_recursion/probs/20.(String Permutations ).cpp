@@ -11,7 +11,7 @@ void Generate_Permutations (string mainstring,string substring){
     }
 
     for (int i=0;i<mainstring.length();i++){
-        char ch = mainstring[i];
+        char ch = mainstring[i]; 
         string left=mainstring.substr(0,i);
         string right=mainstring.substr(i+1);// automatically will take , str size by default 
 
