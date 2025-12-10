@@ -84,7 +84,7 @@ public:
             rightFreq[element]++;
         }
 
-        int totalcount=0;
+        long long totalcount=0;
 
         for(int i=0;i<nums.size();i++){
             rightFreq[nums[i]]--;
@@ -92,10 +92,10 @@ public:
 
         long long target =2*nums[i];
 
-        int leftcount=leftFreq[target];
-        int rightcount=rightFreq[target];
+        long long leftcount=leftFreq[target];
+        long long rightcount=rightFreq[target];
 
-        totalcount+=(leftcount*rightcount);
+        totalcount=(totalcount+(leftcount*rightcount)%MOD)%MOD;
 
         // Now the ith index num will be a part of left side 
 
@@ -103,6 +103,6 @@ public:
 
         }
 
-        return totalcount;
+        return (int)totalcount%MOD;
     }
 };

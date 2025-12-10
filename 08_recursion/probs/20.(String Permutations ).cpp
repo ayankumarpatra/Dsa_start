@@ -4,35 +4,22 @@
 #include<vector>
 using namespace std ;
 
-void Generate_Permutations (string &mainstring,string &current,vector <bool> &used){
-
-    if(current.size()==mainstring.size()){
-        cout<<"["<<current<<"]\n";
+void Generate_Permutations (string mainstring,string substring){
+    if(mainstring==""){
+        cout<<substring<<endl;
         return;
     }
 
-    for(int i=0;i<mainstring.size();i++){
-        if(!used[i]){// i mean if the char isnt used yet 
+    for (int i=0;i<mainstring.length();i++){
+        char ch = mainstring[i];
+        string left=mainstring.substr(0,i);
+        string right=mainstring.substr(i+1);// automatically will take , str size by default 
 
-            current.push_back(mainstring[i]);// choose the elemetn as itsnt choosen before 
-
-            used[i]=true;// mark the element as used 
-
-            Generate_Permutations(mainstring,current,used);
-
-            current.pop_back();//backtracking
-
-            used[i]=false;
-
-        }
+        Generate_Permutations(substring+ch,left+right);
     }
 
 }
 
-void Permutation_Printer(){
-
-    
-}
 
 
 int main (){
@@ -40,7 +27,7 @@ int main (){
     string mainstr="ABcd";
     string substr;
     
-    Generate_Permutations(mainstr,substr,mainstr.size( ),0);
+    Generate_Permutations(mainstr,substr);
 
     return 0;
 }
