@@ -8,7 +8,8 @@ if n no of disks , min no of moves will be 2^n -1
 
 */
 
-void hannoi(int n,char a, char b, char c){//destination
+void hannoi(int n,char a, char b, char c){
+    //destination
     if(n==0){
         return;
     }
