@@ -5,25 +5,19 @@
 using namespace std ;
 // Find subArrays of a given array but by recursion 
 
-void PrintSubArray(vector<int> &Mainarr ,vector <int> subarr,int i=0){
-    if(Mainarr.size()==i){
-        cout<<"{";
-        for (int element : subarr){
-            cout<<element<<",";
-        }
-        cout<<"}\n";
-        return;
+void PrintSubArray(vector<int> &Mainarr ,int start,int end){
+    // function to print he array 
+    cout<<"{";
+    for (int i=start;i<=end;i++){
+        cout<<Mainarr[i]<<" ";
     }
+    cout<<"}"<<endl;
 
-    // including the current element 
-    subarr.push_back(Mainarr[i]);
-    PrintSubArray(Mainarr,subarr,i+1);
-    
-    
-    // ecluding the curr element 
-    subarr.pop_back();
-    PrintSubArray(Mainarr,subarr,i+1);
+// first stop if the index goout of bounds
 
+if(end==Mainarr.size()){
+    return;
+}
 
 }
 
@@ -33,6 +27,7 @@ int main (){
     vector<int> mainarr={5,6,7,8};
     vector<int> subarr;
     
-    PrintSubArray(mainarr,subarr,0);
+    PrintSubArray(mainarr,0,mainarr.size());
     return 0;
 }
+
