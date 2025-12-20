@@ -3,9 +3,11 @@
 #include<vector>
 
 using namespace std ;
+
 // Find subArrays of a given array but by recursion 
 
 void PrintSubArray(vector<int> &Mainarr ,int start,int end){
+
     // function to print he array 
     cout<<"{";
     for (int i=start;i<=end;i++){
@@ -13,14 +15,13 @@ void PrintSubArray(vector<int> &Mainarr ,int start,int end){
     }
     cout<<"}"<<endl;
 
-// first stop if the index goout of bounds
+// first stop if the index go out of bounds
 
 if(end==Mainarr.size()){
     return;
 }
 
 }
-
 
 int main (){
 
