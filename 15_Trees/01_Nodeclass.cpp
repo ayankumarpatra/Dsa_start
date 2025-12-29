@@ -1,6 +1,4 @@
 #include<iostream>
-#include<stack>
-#include<vector>
 
 using namespace std ;
 
@@ -17,8 +15,41 @@ class node {
 };
 
 
+
+void DisplayTree(const node *root){
+    if (root==NULL){
+        return;
+    }
+
+    cout<<root->val<<" ";
+
+    DisplayTree(root->left);
+
+    DisplayTree(root->right);
+
+}
+
+
 int main (){
 
-    
+    node* a=new node(1);
+    node* b=new node(2);
+    node* c=new node(3);
+    node* d=new node(4);
+    node* e=new node(5);
+    node* f=new node(6);
+    node* g=new node(7);
+
+    a->left=b;
+    a->right=c;
+
+    b->left=d;
+    b->right=e;
+
+    c->left=f;
+    c->right=g;
+
+    DisplayTree(a);
+
     return 0;
 }
