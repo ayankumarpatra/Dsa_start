@@ -1,54 +1,36 @@
-// find level of a ctree
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
 
-#include<iostream>
-
-using namespace std ;
-
-class Node {
-    public :
+ #include<iostream>
+ #include<vector>
+ 
+ using namespace std ;
+ 
+class TreeNode {
     int val;
-    Node* left;
-    Node* right;
+    TreeNode* left;
+    TreeNode* right;
 
-    Node(int val){
+    TreeNode(int val=0,TreeNode* left=NULL,TreeNode* right=NULL){
         this->val=val;
-        left=right=NULL;
+        this->left==left;
+        this->right=right;
     }
+
 };
-
-int Tree_Level_Finder(Node * root){
-
-    if (root==NULL){
-        return 0;
-    }
-
-    return (1+(Tree_Level_Finder(root->left)+Tree_Level_Finder(root->right)));
-
-}
-
-
-int main (){
-
-    Node* a=new Node(1);
-    Node* b=new Node(2);
-    Node* c=new Node(3);
-    Node* d=new Node(4);
-    Node* e=new Node(5);
-    Node* f=new Node(6);
-    Node* g=new Node(7);
-    Node* h=new Node(7);
-
-    a->left=b;
-    a->right=c;
-
-    b->left=d;
-    b->right=e;
-
-    c->left=f;
-    f->right=g;
-    g->left=h;
-
-// Height = level-1
-    cout<<"Tree Level is "<<Tree_Level_Finder(a);
-    return 0;
-}
+ 
+ 
+ int main (){
+ 
+     
+     return 0;
+ }
