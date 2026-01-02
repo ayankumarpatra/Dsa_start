@@ -21,15 +21,22 @@ class TreeNode {
 class Solution {
 public:
 
-    void PathHelper(TreeNode* root,string s, vector<string> str){
+    void PathHelper(TreeNode* root,string s, vector<string>& ans){
         // leaf node means left right both null 
 
-        if(root->left==NULL && root->right==NULL){
+        if (root==NULL){
             return;
         }
 
-        str.push_back(char(root->val));
+        if(root->left==NULL && root->right==NULL){
+            s=s+to_string(root->val);
+            ans.push_back(s);
+            return;
+        }
 
+        PathHelper(root->left,s+to_string(root->val)+"->",ans);
+
+        PathHelper(root->right,s+to_string(root->val)+"->",ans);
 
     }
 
@@ -37,7 +44,9 @@ public:
     vector<string> binaryTreePaths(TreeNode* root) {
         vector <string> str;
         
-        
+        PathHelper(root,"",str);
+
+        return str;
     }
 };
  
