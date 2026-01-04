@@ -14,7 +14,8 @@ public:
 
         for (int i=2;i<=n;i++){
             long long newaba= (aba*3 +abc*2)%MOD;
-            long long newabc= (aba*2 +abc*2)%MOD;
+            long long newabc= (aba*2
+                 +abc*2)%MOD;
 
             aba=newaba;
             abc=newabc;

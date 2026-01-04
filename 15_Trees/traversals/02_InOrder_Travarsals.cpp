@@ -15,21 +15,22 @@ class node {
 };
 
 
-// pp 1 2 4 8 5 9 10 3 6 11 7
-
-
-void PreOrder(const node *root){
+void inorder(const node *root){
     if (root==NULL){
         return;
     }
 
-    cout<<root->val<<" ";// Preorder as the func is being called first  
-    // so like here first the left side being called till exist 
-    // then from bottom right side then root right side call but then also left executed first 
+    // inorder as the func is being called at mid  
+    // so like here left root right
+    // ip 4 2 5 1 6 3 7
 
-    PreOrder(root->left);
+    // give straight lines and then draw as per the need and write from left to right 
+    
+    inorder(root->left);
 
-    PreOrder(root->right);
+    cout<<root->val<<" ";
+    
+    inorder(root->right);
 
 }
 
@@ -53,7 +54,7 @@ int main (){
     c->left=f;
     c->right=g;
 
-    PreOrder(a);
+    inorder(a);
 
     return 0;
 }
