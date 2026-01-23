@@ -13,10 +13,9 @@ public:
 
         nums.insert(nums.end(),nums.begin(),nums.end());
 
-        return ans;
+        return nums;
     }
 };
-
 
 int main (){
 
