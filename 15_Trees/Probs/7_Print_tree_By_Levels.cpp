@@ -56,6 +56,36 @@ void printLeveln(Node* root, int leveltoprint,int currlevel=1){// old func no mo
     printLeveln(root->right,leveltoprint,currlevel+1);
 }
 
+/*
+if you wish to reverse the tree travarsal print eg 
+you are printing 
+1
+2 3
+4 5 6 ....
+
+but if you wish to print 
+1
+3 2
+6 5 4 ..... then only one change need , call the right func before left ...
+
+eg change this 
+
+    // left
+    printLeveln(root->left,leveltoprint,currlevel+1);
+    // right
+    printLeveln(root->right,leveltoprint,currlevel+1);
+
+to 
+
+    // right
+    printLeveln(root->right,leveltoprint,currlevel+1);
+
+    // left
+    printLeveln(root->left,leveltoprint,currlevel+1);
+
+
+*/
+
 void treeprinter(Node* root){
     int maxlevel=treelevel_finder(root);
 
