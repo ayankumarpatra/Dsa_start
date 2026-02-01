@@ -27,38 +27,19 @@
     TREE will be like 1 left 2 , right 3, 2s left 4 rest all NULL
     */
  
-void treecreator(const vector<int> &array){
-    int size=array.size();
+void treecreator(const vector<int> &array){// note i am defyning null as int_min as only -1 maybe a possible value 
 
-    if (size<=0){
-        return;
+    // if array size is 0  theres no tree;
+
+    if (array.size()==0){
+        return ;// returning nothing 
     }
 
-    int currlevel=0,currindex=0,maxindex=array.size();
+    // now tree having some values 
 
-    TreeNode * tempnode=new TreeNode(array[currindex]);
+    TreeNode* tempnode=new TreeNode(array[0]);
+    TreeNode *root=tempnode; 
 
-    currindex++;
-    
-    TreeNode* root=tempnode;
-    
-    // as binary tree so no of nodes in each level= 2^level
-    
-    queue<int> q;
-    
-    q.push(array[currindex]);
-    currindex++;
-    q.push(array[currindex]);
-    currindex++;
-
-    while (currindex<maxindex)
-    {
-        while (q.front()==NULL){
-            q.pop();
-        }
-        elslllxxixixxxixixi
-    }
-    
 }
 
  

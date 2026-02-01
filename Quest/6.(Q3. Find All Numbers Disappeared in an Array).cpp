@@ -9,20 +9,14 @@ public:
     vector<int> findDisappearedNumbers(vector<int>& nums) {
         sort(nums.begin(),nums.end());
 
-        int travel_value=1;// already said 1 to n
-
         int maxlen=nums.size();
 
         vector<int> returnvector;
 
+        returnvector.push_back(1);
+
         for(int i=0;i<maxlen;i++){
-            if (nums[i]!=travel_value){
-                returnvector.push_back(travel_value);
-                travel_value++;
-            }
-            if (nums[i]==travel_value){
-                travel_value++;
-            }
+            
         }
 
         return returnvector;
