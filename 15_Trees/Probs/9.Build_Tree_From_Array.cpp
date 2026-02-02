@@ -1,4 +1,5 @@
  #include<iostream>
+ #include<climits>
  #include<vector>
  #include<queue>
  
@@ -25,6 +26,8 @@
     you will be given a array like {1,2,3,4,NULL}
    
     TREE will be like 1 left 2 , right 3, 2s left 4 rest all NULL
+
+    construct tree fro level order travarsal
     */
  
 void treecreator(const vector<int> &array){// note i am defyning null as int_min as only -1 maybe a possible value 
@@ -35,10 +38,34 @@ void treecreator(const vector<int> &array){// note i am defyning null as int_min
         return ;// returning nothing 
     }
 
-    // now tree having some values 
+    // now tree will have some values;
 
-    TreeNode* tempnode=new TreeNode(array[0]);
-    TreeNode *root=tempnode; 
+    int i=0,maxlen=array.size();
+
+    TreeNode * root=new TreeNode(array[i++]);
+    TreeNode * tempnode;
+
+    queue<TreeNode *> q;
+    q.push(root);
+
+    while (q.size()>0 && i<maxlen)
+    {
+        TreeNode * currroot=q.front();
+        q.pop();
+
+        if (i<maxlen && array[i]!=INT_MIN){
+            currroot->left=new TreeNode(array[i]);
+            q.push(currroot->left);
+        }
+        i++;
+        if (i<maxlen && array[i]!=INT_MIN){
+            currroot->right=new TreeNode(array[i]);
+            q.push(currroot->right);
+        }
+        i++;
+        
+    }
+    
 
 }
 
