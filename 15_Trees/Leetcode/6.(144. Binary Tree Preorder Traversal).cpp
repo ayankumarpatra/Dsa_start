@@ -1,5 +1,6 @@
  #include<iostream>
  #include<vector>
+ #include<stack>
  
  using namespace std ;
  
@@ -42,6 +43,44 @@ public:
     }
 };
  
+
+// travarse by iteration 
+
+
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+
+        vector<int> returnvector;
+
+        if (root==NULL){
+            return returnvector;
+        }
+
+
+        stack<TreeNode*> st;
+
+        st.push(root);
+        TreeNode* temp;
+
+        while(!st.empty()){
+            temp=st.top();
+            st.pop();
+
+            returnvector.push_back(temp->val);
+
+            if (temp->right!=NULL){
+                st.push(temp->right);
+            }
+            if (temp->left!=NULL){
+                st.push(temp->left);
+            }
+        }
+
+        return returnvector;
+        
+    }
+};
  int main (){
  
      
