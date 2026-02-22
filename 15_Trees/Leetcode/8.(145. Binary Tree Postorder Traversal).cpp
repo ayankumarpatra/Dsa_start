@@ -1,5 +1,7 @@
  #include<iostream>
  #include<vector>
+ #include<stack>
+ #include<algorithm>
  
  using namespace std ;
  
@@ -46,7 +48,38 @@ public:
 };
 
 
- 
+// by iteration 
+
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int> returnvector;
+        stack<TreeNode*> st;
+        TreeNode*currnode;
+
+        if(root!=NULL){
+            st.push(root);
+        }
+
+        while(st.size()>0){
+            currnode=st.top();
+            st.pop();
+
+            returnvector.push_back(currnode->val);
+
+            if (currnode->left!=NULL){
+                st.push(currnode->left);
+            }
+            if (currnode->right!=NULL){
+                st.push(currnode->right);
+            }
+        }
+        reverse(returnvector.begin(),returnvector.end());
+        return returnvector;
+    }
+};
+
+
  int main (){
  
      
