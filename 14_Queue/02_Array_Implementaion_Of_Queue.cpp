@@ -22,7 +22,7 @@ class Queue {
     void push(int val){
         // cases possible 1. overflow 2. insert front 3. insert end 4. insert any pos
     if (currsize>=len){
-        cout<<"Invalid position , please retry \n";
+        cout<<"Queue Full , please retry \n";
         return;
     }
     Arr[back++]=val;
@@ -31,7 +31,7 @@ class Queue {
 }
 
     void pop(){
-        if (currsize<=0){
+        if (currsize<0){
             cout<<"Underflow \n";
             return;
         }
