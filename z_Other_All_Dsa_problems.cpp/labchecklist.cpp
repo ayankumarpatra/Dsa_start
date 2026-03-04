@@ -14,7 +14,8 @@ Iterative a& Recursive approach)
        f)    Implementation  of  Circular Queue using linked List
       g)    Insertion, Deletion from ends from a singly linked list, circular linked list   and
              double linked list.
-5)     Insertion  of a node, count the total nodes, tree traversals and searching for  maximum element & minimum element for a Binary Search Tree (BST).
+5)     Insertion  of a node, count the total nodes, tree traversals and searching for
+       maximum element & minimum element for a Binary Search Tree (BST).
 6)   Implementation of Tower of Hanoi problem.
 7)   Convert an infix expression to equivalent postfix expression.
 8)   Postfix Evaluation
