@@ -34,7 +34,7 @@ public:
             return true;
         }
         
-        for (int i=0 ;i<5;i++){
+        for (int i=0 ;i<3;i++){
             TransposeMAtrix(target);
 
             if (mat==target){
