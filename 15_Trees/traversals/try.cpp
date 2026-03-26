@@ -1,5 +1,6 @@
  #include<iostream>
  #include<vector>
+ #include<queue>
  
  using namespace std ;
  
@@ -16,37 +17,41 @@ class TreeNode {
     }
 
 };
- 
-void preoder(TreeNode* root){
-    if (root==NULL){
+
+//BFS
+
+void bfs(TreeNode* root){
+    if(root==NULL){
         return;
     }
 
-    cout<<root->val<<" ";// preorder
-    preoder(root->left);
-    preoder(root->right);
-}
+    queue<TreeNode*> q;
+    q.push(root);
 
-void inoder(TreeNode* root){
-    if (root==NULL){
-        return;
+    while (!q.empty())
+    {
+        int printill=q.size();
+
+        for (int i=0;i<printill;i++){
+            cout<<q.front()->val<<" ";
+
+            if (q.front()->left!=NULL){
+                q.push(q.front()->left);
+            }
+            if (q.front()->right!=NULL){
+                q.push(q.front()->right);
+            }
+
+            q.pop();
+            
+        }
+        cout<<endl;
     }
-
-    inoder(root->left);
-    cout<<root->val<<" ";
-    inoder(root->right);
+    
 }
 
-void postoder(TreeNode* root){
-    if (root==NULL){
-        return;
-    }
 
-    postoder(root->left);
-    postoder(root->right);
-    cout<<root->val<<" ";
-}
- 
+
  int main (){
 
     TreeNode* a= new TreeNode(1);
@@ -73,7 +78,9 @@ void postoder(TreeNode* root){
     f->right=k;
     c->right=g;
 
-    preoder(a);
+    // level Order Travarsal
+    
+    bfs(a);
 
      return 0;
  }
