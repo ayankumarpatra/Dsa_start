@@ -30,26 +30,7 @@ public:
     }
 
     string countAndSay(int n) {
-        string s1="",s="";
-        int i=0;
-
-        s=FillStr(n);
-
-        while (i<s.size()){
-            char count=0;
-            char currchar=s[i];
-
-            while (i<s.size() && s[i]==currchar)
-            {
-                i++;
-                count++;
-            }
-
-            s1+=currchar;
-            s1+=count;
-            
-        }
-        return s1;
+        return FillStr(n);
     }
 };
 
