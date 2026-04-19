@@ -26,7 +26,8 @@ public:
             }
 
             else if (segment!="start" && segment!="end"){
-                if (start){/*
+                if (start){
+                    /*
                     "1:start:2" like for this 1 , at index 0 is the process 
                     then start end handelled manually , 
                     then start or end point

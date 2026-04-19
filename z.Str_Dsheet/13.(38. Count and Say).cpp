@@ -6,30 +6,34 @@ using namespace std ;
 
 class Solution {
 public:
-    string FillStr(int n,string s){
+    string FillStr(int n){// taking number to make the string out of it 
         if (n==1){
-            s+="11";
-            return s;
+            return "1";// base case for 1 , one 1 only 
         }
-        string tempstr="";
-        for (int i=0;i<s.size();i++){
-            char currchar=s[i];
-            int count =1;
-            while (i<s.size() && s[i]==currchar)
+
+        string prev= FillStr(n-1);
+
+        string temp="";
+        for(int i=0;i<prev.size(); ){// no i++ as we have to move to next char 
+            int j=i;
+            int count=0;
+            while (j<prev.size() && prev[i]==prev[j])
             {
-                i++;
+                count++;
+                j++;
             }
-            
-            
+            temp+=to_string(count);
+            temp+=prev[i];
+            i=j;           
         }
-        return s+FillStr(n-1,s);
+        return temp;
     }
 
     string countAndSay(int n) {
         string s1="",s="";
         int i=0;
 
-        s=FillStr(n,s);
+        s=FillStr(n);
 
         while (i<s.size()){
             char count=0;
@@ -52,9 +56,4 @@ public:
 
 int main (){
     
-    Solution sol;
-
-    string s=sol.countAndSay(3);
-
-    return 0;
 }
