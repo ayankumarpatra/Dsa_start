@@ -14,7 +14,11 @@ int main (){
     unordered_set<int> sa;
     
     sa.insert(1);
-    ///
+    /*
+    doesnt matter how many times you insert the 1 , it will be added 1 time only 
+    and elements are added randomly , not in a ordered manner
+    
+    */
     
     return 0;
 }
