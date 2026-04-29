@@ -32,6 +32,12 @@ int main (){
 
     here s.find() searches in the set and if its not found then it returns the last element 
 
+
+
+
+
+    to erase use setname.erase(value to ease);
+
     
     */
    sa.insert(5);
