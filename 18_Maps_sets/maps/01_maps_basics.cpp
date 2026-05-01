@@ -72,6 +72,34 @@ int main (){
     finding 
 
     mapname.find(key)!=map.end()
+
+
+    In C++, searching a hash map isn't "free." You can store the result of the first search in an iterator:
+
+    // for prob 1 , 2 sum
+    auto it = um.find(remaining);
+    if (it != um.end()) {
+        return {i, it->second}; // Using initializer list
+    }
+
+
+
+
+    The Power of operator[]
+
+    In C++, std::unordered_map has a very helpful feature: if you try to access a key that doesn't exist using [], it automatically creates that key with a default value of 0.
+
+    Your code:
+    C++
+
+    auto check = um.find(arr[i]);
+    if (check == um.end()) { um[arr[i]] = 1; }
+    else { check->second++; }
+
+    The Shortcut:
+    C++
+
+    um[arr[i]]++;
     
     */
     
