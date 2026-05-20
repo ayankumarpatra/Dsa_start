@@ -32,8 +32,13 @@ public:
         int index=0;
 
         for (int i=nums.size()-1;i>0;i--){
-            
+            if (nums[i-1]<nums[i]){
+                index=i;
+                break;
+            }
         }
+
+        swap()
 
 
     }
