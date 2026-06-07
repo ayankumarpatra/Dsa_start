@@ -1,57 +1,62 @@
 #include<iostream>
 #include<stack>
-#include<algorithm>
+#include<queue>
 #include<vector>
+#include<algorithm>
 
 using namespace std ;
 
-struct item
-{
-    double profit,weight,ratio;
+struct item {
+    int profit ,weight,ratio;
 };
 
-bool comparator(item a,item b){
+bool compareitems(item a , item b){
     return a.ratio>b.ratio;
 }
 
 int main (){
 
     int n;
-    cout<<"Enter the no of elements : ";
+    cout<<"Enter No of items : ";
     cin>>n;
-    
+
     vector<item> items(n);
     
     for (int i=0;i<n;i++){
-        cout<<"\nEnter the profit of element"<<i+1<<" ";
+        cout<<"\nEnter profit of item "<<i+1<<" : ";
         cin>>items[i].profit;
-        cout<<"Enter the weight of element"<<i+1<<" ";
+
+        cout<<"\nEnter weight of item "<<i+1<<" : ";
         cin>>items[i].weight;
-        
+
         items[i].ratio=items[i].profit/items[i].weight;
+
     }
-    
-    sort(items.begin(),items.end(),comparator);
 
-    double weight;
-    cout<<"Enter Weight of the bag : ";
-    cin>>weight;
-    int i=0;
+    sort(items.begin(),items.end(),compareitems);
 
-    while (weight>0)
+    int capacity;
+
+    cout<<"Enter Bag capacity ";
+    cin>>capacity;
+
+    double currprofit=0.0,remweight=capacity;
+
+    for (int i=0; i<n && remweight>0;i++)
     {
-        if (items[i].weight>=weight){
-            weight-=items[i].weight;
-            cout<<"Weight "<<items[i].weight<<"Taken Fully \n Remaining Weight ="<<weight<<endl;
+        if (remweight>=items[i].weight){
+            remweight-=items[i].weight;
+            currprofit+=items[i].profit;
         }
-        else{
-            
-            cout<<"Weight "<<items[i].weight<<"Taken partially : "<< items[i].ratio*weight<<"\n Remaining Weight ="<<0<<endl;
-            weight=0;
-        }
-        i++;
-    }
-    
 
+        else {
+            currprofit+=items[i].ratio*remweight;
+            remweight=0;
+        }
+    }
+
+    cout<<"Total Profit  "<<currprofit;
+    
+    
     return 0;
 }
