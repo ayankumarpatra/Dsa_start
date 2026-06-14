@@ -18,51 +18,46 @@ int adj[n][n] = {
     {0, 0, 0, 0, 0}   // E(4): no outgoing edges
 };
 
+
 void dijkstra (int src){
+
     vector<int> dist (n,INT_MAX);
     dist[src]=0;
 
     vector<bool> visited(n,false);
 
     for (int count=0;count<n-1;count++){
-
         int min=INT_MAX;
-        int u=-1;
+        int u;
 
         for (int v=0;v<n;v++){
-            if ( !visited[v] // not visited 
-                && dist[v]<=min // dist is min than curr dist 
-
+            if (
+                !visited[v] // v not visited 
+                && dist[v]<= min
             ){
-
                 min=dist[v];
                 u=v;
             }
         }
-        
-        // now u is the lowest cost neighbour 
-        
-        visited[u]=true;
-        
-        for (int v=0;v<n;v++){
-            if ( dist[u]!=INT_MAX // u is reachable 
-                && adj[u][v]!=0 // u to v edge must be there
-                && !visited[v] // v isnt visited 
-                &&  dist[u]+adj[u][v]<=dist[v]
 
+        // now u is the smallest cost neighbour
+        visited[u]=true;
+
+        for (int v=0;v<n;v++){
+            if (
+                !visited[v] // v not visited
+                && adj[u][v]!=0 // u,v connected 
+                && dist [u]!=INT_MAX //u must be visited 
+                && dist[u]+adj[u][v]<= dist[v]
             ){
-                dist[v]=dist[u]+adj[u][v];
+                dist[v]= dist[u]+adj[u][v];
             }
         }
-
     }
+        cout<<"Distance from source : "<<src<<endl;
 
-    // now only printing remaninng 
-
-    cout<<" Distance from source "<<src<<" to \n";
-
-    for (int v=0;v<n;v++){
-        cout<<"Vertex "<<v<<" is "<<dist[v]<<endl;
+    for (int i=0;i<n;i++){
+        cout<<"vertex "<<i<<"  distance :  "<<dist[i]<<endl;
     }
 
 }
@@ -71,5 +66,6 @@ void dijkstra (int src){
 int main (){
 
     dijkstra(0);
+    
     return 0;
 }

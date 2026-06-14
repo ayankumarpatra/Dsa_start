@@ -1,66 +1,87 @@
-#include<iostream>
-#include<climits>
-#include<queue>
-#include<vector>
-#include<algorithm>
+#include <iostream>
+#include <vector>
+#include <climits>
+using namespace std;
 
-using namespace std ;
+const int n = 5; // total number of nodes
 
-const int n= 4; // Define the number of vertices
-
-
-int adj[n][n] = {  // Hardcoded Adjacency Matrix
-    {0, 2, 0, 6},
-    {2, 0, 3, 8},
-    {0, 3, 0, 0},
-    {6, 8, 0, 0}
+// adj[u][v] = weight of undirected edge between u and v
+// 0 means no edge
+int adj[n][n] = {
+    {0, 2, 3, 0, 0},  // A(0): A-B=2, A-C=3
+    {2, 0, 6, 5, 4},  // B(1): B-A=2, B-C=6, B-D=5, B-E=4
+    {3, 6, 0, 0, 7},  // C(2): C-A=3, C-B=6, C-E=7
+    {0, 5, 0, 0, 1},  // D(3): D-B=5, D-E=1
+    {0, 4, 7, 1, 0}   // E(4): E-B=4, E-C=7, E-D=1
 };
 
+// -------------------------------------------------------
+// void primMST()
+//   No parameter needed — we always start from node 0
+// -------------------------------------------------------
+void primMST() {
 
-void primsmst(){
-
+    // parent[v] = which node connected v into the MST
+    // This lets us print the actual MST edges at the end
     vector<int> parent(n);
-    vector<int> key(n,INT_MAX);
-    vector<bool> mstset(n,false);
 
-    key[0]=0;
-    parent[0]=-1;
+    // key[v] = cheapest edge weight to pull v into the MST
+    // Start with all as "infinity" (unknown)
+    vector<int> key(n, INT_MAX);
 
-    for (int count=0;count<n-1;count++){
-        int u;
-        int min=INT_MAX;
+    // mstSet[v] = true means v is already inside the MST
+    vector<bool> mstSet(n, false);
 
-        for (int v=0;v<n;v++){
-            if (!mstset[v] && key[v]<min){
-                min=key[v];
-                u=v;
+    // Start from node 0
+    // key[0] = 0 means "it costs nothing to start here"
+    key[0] = 0;
+
+    // parent[0] = -1 means "node 0 has no parent, it's the root"
+    parent[0] = -1;
+
+    // We need to add (n-1) more nodes to complete the MST
+    for (int count = 0; count < n - 1; count++) {
+
+        // --- STEP 1: Find the node NOT in MST with smallest key ---
+        int min = INT_MAX, u;
+
+        for (int v = 0; v < n; v++) {
+            // pick v only if not yet in MST AND its key is smaller
+            if (!mstSet[v] && key[v] <= min) {
+                min = key[v];
+                u = v; // u = cheapest node to pull in next
             }
         }
-        
-        mstset[u]=true;
-        
-        for (int v=0;v<n;v++){
-            if (adj[u][v] && 
-                !mstset[v] &&
-                adj[u][v]<key[v] ){
-                    parent[v]=u;
-                    key[v]=adj[u][v];
-                }
+
+        // --- STEP 2: Add u to the MST ---
+        mstSet[u] = true;
+
+        // --- STEP 3: Update keys of u's neighbors ---
+        for (int v = 0; v < n; v++) {
+            // Update key[v] only if ALL of these are true:
+            //   - there IS an edge from u to v (adj[u][v] != 0)
+            //   - v is NOT yet in the MST
+            //   - the edge u-v is cheaper than v's current key
+            if (adj[u][v]           // edge u-v exists
+                && !mstSet[v]       // v not yet in MST
+                && adj[u][v] < key[v]) { // cheaper than what we knew
+
+                parent[v] = u;          // record: v was reached via u
+                key[v] = adj[u][v];     // update key to this cheaper edge
+            }
         }
-
     }
 
-    cout<<"Prims Result \nEdge \t Weight \n";
-
-    for (int i=1;i<n;i++){
-        cout<<parent[i]<<" - "<<i <<" \t "<< adj[i][parent[i]]<<endl;
+    // --- Print the MST edges and their weights ---
+    cout << "Prim's MST result:\n";
+    cout << "Edge \t Weight\n";
+    for (int i = 1; i < n; i++) { // start from 1, node 0 has no parent
+        cout << parent[i] << " - " << i
+             << "\t" << adj[i][parent[i]] << "\n";
     }
-
 }
 
-int main (){
-
-    primsmst();
-    
+int main() {
+    primMST();
     return 0;
 }
