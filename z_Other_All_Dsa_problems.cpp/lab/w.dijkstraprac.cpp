@@ -8,8 +8,6 @@ using namespace std ;
 
 const int n = 5; // total number of nodes in the graph
 
-const int inf=INT_MAX;
-
 // adj[u][v] stores the weight of edge from u to v
 // if adj[u][v] = 0, there's no direct edge
 int adj[n][n] = {
@@ -21,49 +19,51 @@ int adj[n][n] = {
 };
 
 
-void dijkstra (int src){
+void dijkstra(int src){
 
-    vector<int> dist(n,inf);
+    vector<int> dist (n,INT_MAX);
     dist[src]=0;
-
     vector<bool> visited(n,false);
 
-    for (int count=0;count<n;count++){
-        // total n nodes , src processed so remaining n-1
+    for (int count=0; count<n-1; count++){
 
-        int min=inf;
+        int min=INT_MAX;
         int u=-1;
 
-        for (int v=0; v<n ;v++){
+        // getting lowest cost neighbour from src eg src->u
+
+        for (int v=0;v<n;v++){
             if (
                 !visited[v]// v not visited
-                && dist[v]<=min// dist to v is less than min
+                && dist[v]<=min
             ){
-                u=v;
                 min=dist[v];
+                u=v;
             }
         }
-        // now u is lowest cost neighbour
+
+        // now u is the lowest cost neighbour
 
         visited[u]=true;
 
-        for (int v=0 ;v<n ;v++ ){// this time neutralizing edges 
+        for (int v=0;v<n;v++){// relaxing adjacent edges to v
+
             if (
-                dist[u]!=inf// u is reaachable
-                && adj[u][v]!=0 // edge exist btn u and v
-                && dist[u]+adj[u][v]<dist[v] // cost from src->v via u is less than src->v precalculated 
+                !visited[v] &&
+                dist[u]!=INT_MAX //u reachable
+                && adj[u][v]!=0 // edge exist btn u to v
+                && dist[u]+adj[u][v]<dist[v]// src to u to v is less than precalculated src to v
             ){
                 dist[v]=dist[u]+adj[u][v];
             }
         }
     }
 
-    // everything done , printing remaining 
+    // all done now printing remanining 
 
-    cout<<"Distance from vertex "<<src<<" to \n";
-
-    for (int v=0; v<n ;v++){
-        cout<<"Vertex "<<v<<" is : "<<dist[v]<<endl;
+    cout<<"Distance from source vertex "<<src<<" to \n";
+    for (int v=0;v<n;v++){
+        cout<<"Vetex "<<v<<" is : "<<dist[v]<<endl;
     }
 }
 
