@@ -10,7 +10,71 @@ struct edge{
 };
 
 bool comparator(edge a , edge b){
-    return a.weight>b.weight;
+    return a.weight < b.weight;
+}
+int parent[n];
+
+int find (int v){ // find parent node of a node
+    if (parent[v]!=v){
+        parent[v]=find(parent[v]);
+    }
+    return parent[v];
+}
+
+void unite (int x , int y){
+    int rootx=parent[x];
+    int rooty=parent[y];
+
+    parent[rootx]=rooty;
+}
+
+
+void kruskalmst(edge edges[] , int numedges){
+
+    // sorting edges 
+    sort(edges,edges+numedges,comparator);
+
+    //filling the parent 
+
+    for (int i=0;i<n;i++){
+        parent[i]=i;
+    }
+
+    vector<edge> mst;
+
+    // iterating through each edge
+
+    for (int e=0;e<numedges;e++){
+
+        int u=edges[e].src;
+        int v=edges[e].dest;
+        int w=edges[e].weight;
+
+        int rootu=find(u);
+        int rootv=find(v);
+
+        if (rootu!=rootv){ // safe to merge not from a common parent so no cycle 
+            mst.push_back(edges[e]);
+            unite(rootu,rootv);// merge the group
+        }
+
+        if ((int)mst.size()==n-1){
+            break;
+        }
+    }
+
+    // done only print remaining 
+    int totalweight=0;
+
+    cout<<"Kruskals mst result\n";
+    cout<<"Edge \t Weight\n";
+
+    for (auto e : mst){
+        cout<<e.src<<" - "<<e.dest<<" \t "<<e.weight<<endl;
+        totalweight+=e.weight;
+    }
+
+    cout<<"\nTotalweight : "<<totalweight;
 }
 
 int main() {
@@ -26,8 +90,8 @@ int main() {
         {3, 4, 1}   // D-E weight 1
     };
 
-    int numEdges = 7;
+    int numedgess = 7;
 
-    kruskalMST(edges, numEdges);
+    kruskalmst(edges, numedgess);
     return 0;
 }
