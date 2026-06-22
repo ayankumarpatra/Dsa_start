@@ -22,43 +22,7 @@ int adj[n][n] = {
 
 void Dijkstra(int src){
 
-    vector<int> dist (n,INT_MAX);
-    dist[0]=0;// distance from source to source is always 0
 
-    vector<bool> visited (n,false);
-
-    for (int count =0;count<n-1;count++){
-        // as n nodes and src already processed so remaningn n-1
-
-        int min=INT_MAX;
-        int u=-1;
-
-        for (int v=0;v<n;v++){
-            if (!visited[v] && dist[v]<=min){
-                min=dist[v];
-                u=v;
-            }
-        }
-        // now u is the lowest cost neighbour
-        visited[u]=true;
-        for (int v=0;v<n;v++){
-            if (
-                !visited[v] && adj[u][v]!=0 // not connected by edge
-                && dist[u]!=INT_MAX 
-                && dist[u] + adj[u][v] <dist[v]
-            ){
-                dist[v]= dist[u] + adj[u][v];
-            }
-        }
-
-    }
-
-    // now all work done only printing remaning
-
-    cout<<"Distance from Source "<<src<<" to \n";
-    for (int v=0;v<n;v++){
-        cout<<"vertex "<<v <<" is : "<<dist[v]<<endl;
-    }
 }
 
 
