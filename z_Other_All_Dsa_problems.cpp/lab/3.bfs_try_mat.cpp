@@ -20,33 +20,34 @@ vector<vector<int>> adj={
     {0,0,0,0,0,0,1,0,0,0},//9
 };
 
-void bfs(int node){
+void bfs(int start){
 
-    queue<int> q;
-    vector<bool> visited (n,false);
-    q.push(node);
+vector<bool> visited (n,false);
+queue<int> q;
 
-    while (!q.empty())
-    {
-        int frontnode=q.front();
-        q.pop();
+q.push(start);
+visited[start]=true;
 
-        cout<<frontnode<<" ";
-        visited[frontnode]=true;
+while (q.size()>0)
+{
+    int currnode=q.front();
+    cout<<currnode<<" ";
+    q.pop();
 
-        for (int i=0;i<n;i++){
-            if (!visited[i] && adj[frontnode][i]==1){
-                q.push(i);
-                visited[i]=true;
-            }
+    for (int i=0;i<n;i++){
+        if (adj[currnode][i]==1 && !visited[i]){
+            visited[i]=true;
+            q.push(i);
         }
     }
-    
+}
+
 
 }
 
 int main (){
 
+    bfs(0);
     
     return 0;
 }
