@@ -25,16 +25,16 @@ void primMST() {
     // This lets us print the actual MST edges at the end
     vector<int> parent(n);
 
-    // key[v] = cheapest edge weight to pull v into the MST
+    // dist[v] = cheapest edge weight to pull v into the MST
     // Start with all as "infinity" (unknown); simple words its the dist 
-    vector<int> key(n, INT_MAX);
+    vector<int> dist(n, INT_MAX);
 
-    // mstSet[v] = true means v is already inside the MST
-    vector<bool> mstSet(n, false);
+    // visited[v] = true means v is already inside the MST
+    vector<bool> visited(n, false);
 
     // Start from node 0
-    // key[0] = 0 means "it costs nothing to start here"
-    key[0] = 0;
+    // dist[0] = 0 means "it costs nothing to start here"
+    dist[0] = 0;
 
     // parent[0] = -1 means "node 0 has no parent, it's the root"
     parent[0] = -1;
@@ -42,32 +42,33 @@ void primMST() {
     // We need to add (n-1) more nodes to complete the MST
     for (int count = 0; count < n - 1; count++) {
 
-        // --- STEP 1: Find the node NOT in MST with smallest key ---
+        // --- STEP 1: Find the node NOT in MST with smallest dist ---
         int min = INT_MAX, u;
 
         for (int v = 0; v < n; v++) {
-            // pick v only if not yet in MST AND its key is smaller
-            if (!mstSet[v] && key[v] <= min) {
-                min = key[v];
+            // pick v only if not yet in MST AND its dist is smaller
+            if (!visited[v] && dist[v] <= min) {
+                min = dist[v];
                 u = v; // u = cheapest node to pull in next
             }
         }
 
         // --- STEP 2: Add u to the MST ---
-        mstSet[u] = true;
+        visited[u] = true;
 
-        // --- STEP 3: Update keys of u's neighbors ---
+        // --- STEP 3: Update dists of u's neighbors ---
         for (int v = 0; v < n; v++) {
-            // Update key[v] only if ALL of these are true:
+            // Update dist[v] only if ALL of these are true:
             //   - there IS an edge from u to v (adj[u][v] != 0)
             //   - v is NOT yet in the MST
-            //   - the edge u-v is cheaper than v's current key
+            //   - the edge u-v is cheaper than v's current dist
             if (adj[u][v]           // edge u-v exists
-                && !mstSet[v]       // v not yet in MST
-                && adj[u][v] < key[v]) { // cheaper than what we knew
-
+                && !visited[v]       // v not yet in MST
+                && adj[u][v] < dist[v]) // cheaper than what we knew
+                
+                { 
                 parent[v] = u;          // record: v was reached via u
-                key[v] = adj[u][v];     // update key to this cheaper edge
+                dist[v] = adj[u][v];     // update dist to this cheaper edge
             }
         }
     }
@@ -76,8 +77,7 @@ void primMST() {
     cout << "Prim's MST result:\n";
     cout << "Edge \t Weight\n";
     for (int i = 1; i < n; i++) { // start from 1, node 0 has no parent
-        cout << parent[i] << " - " << i
-             << "\t" << adj[i][parent[i]] << "\n";
+        cout << parent[i] << " - " << i << "\t" << adj[i][parent[i]] << "\n";
     }
 }
 

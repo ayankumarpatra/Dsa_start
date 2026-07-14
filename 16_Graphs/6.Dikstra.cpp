@@ -54,7 +54,7 @@ void dijkstra(int src) {
             //   - u itself was reachable (dist[u] != INT_MAX)
             //   - going through u gives a shorter path to v
             if (!visited[v]
-                && adj[u][v]              // edge u→v exists
+                && adj[u][v]!=0              // edge u→v exists
                 && dist[u] != INT_MAX     // u is reachable
                 && dist[u] + adj[u][v] < dist[v]) {
 
