@@ -12,17 +12,16 @@ struct Edge {
 void bellmanFord(Edge edges[], int numEdges, int src) {
 
     vector<int> dist(n,INT_MAX);
-    dist[src]=0;
 
     for (int count=0; count<n-1; count++){
-
-        for (int e=0;e<numEdges;e++ ){
+        for (int e=0; e<numEdges; e++){
+    
             int u=edges[e].src;
             int v=edges[e].dest;
             int w=edges[e].weight;
-
+    
             if (
-                dist[u]!=INT_MAX // u is reachable
+                dist[u]!=INT_MAX
                 && dist[u]+w<dist[v]
             ){
                 dist[v]=dist[u]+w;
@@ -30,28 +29,27 @@ void bellmanFord(Edge edges[], int numEdges, int src) {
         }
     }
 
-    // -ve cycle dtection
+    for (int e=0; e<numEdges; e++){
 
-        for (int e=0;e<numEdges;e++ ){
-            int u=edges[e].src;
-            int v=edges[e].dest;
-            int w=edges[e].weight;
+        int u=edges[e].src;
+        int v=edges[e].dest;
+        int w=edges[e].weight;
 
-            if (
-                dist[u]!=INT_MAX // u is reachable
-                && dist[u]+w<dist[v]
-            ){
-                cout<<"-ve cycle detected Exitting \n ";
-                return;
-            }
+        if (
+            dist[u]!=INT_MAX
+            && dist[u]+w<dist[v]
+        ){
+            cout<<"- ve cycle detected \n";
+            return;
         }
+    }
 
-    // all safe only printing remaining 
+    cout<<"Distance to vertex from source vertex \n";
 
-    cout<<"Distance from source to vertex \n ";
     for (int v=0;v<n;v++){
         cout<<v<<" "<<dist[v]<<endl;
     }
+
 }
 
 int main() {
@@ -73,4 +71,3 @@ int main() {
     bellmanFord(edges, numEdges, 0); // start from A (index 0)
     return 0;
 }
-
