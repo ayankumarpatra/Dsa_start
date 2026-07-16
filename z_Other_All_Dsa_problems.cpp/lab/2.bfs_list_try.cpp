@@ -19,28 +19,28 @@ vector<vector<int>> adj={
     {6},//9
 };
 
-void bfs(int node){
-    vector<bool> visited(n,false);
+void bfs(int start){
 
     queue<int> q;
-
-    q.push(node);
+    vector<int> visited(n,false);
+    q.push(start);
 
     while (!q.empty())
     {
-        int currnode=q.front();
+        int node=q.front();
         q.pop();
-        cout<<currnode<<" ";
-        visited[currnode]=true;
-        
-        for (int em:adj[currnode]){
-            if (!visited[em]){
-                q.push(em);
-                visited[em]=true;
+
+        cout<<node<<" ";
+
+        for (int currnode : adj[node]){
+            if (!visited[currnode]){
+                q.push(currnode);
+                visited[currnode]=true;
             }
         }
-
     }
+    
+    
 }
 
 int main (){

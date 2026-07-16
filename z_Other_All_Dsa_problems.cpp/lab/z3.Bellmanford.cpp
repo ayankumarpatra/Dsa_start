@@ -1,63 +1,30 @@
-#include <iostream>
-#include <vector>
-#include <climits>
-using namespace std;
+#include<iostream>
+#include<stack>
+#include<climits>
+#include<vector>
+#include<algorithm>
 
-const int n = 5; // total number of vertices
+using namespace std ;
 
-struct Edge {
+
+const int n = 5;
+
+struct edge{
     int src,dest,weight;
 };
 
-void bellmanFord(Edge edges[], int numEdges, int src) {
+void bellmanFord(edge edges[], int numEdges, int src) {
+    
+// failed 3 rd time 
 
-    vector<int> dist(n,INT_MAX);
-    dist[src]=0;
-
-    for (int count=0; count<n-1; count++){
-
-        for (int e=0;e<numEdges;e++ ){
-            int u=edges[e].src;
-            int v=edges[e].dest;
-            int w=edges[e].weight;
-
-            if (
-                dist[u]!=INT_MAX // u is reachable
-                && dist[u]+w<dist[v]
-            ){
-                dist[v]=dist[u]+w;
-            }
-        }
-    }
-
-    // -ve cycle dtection
-
-        for (int e=0;e<numEdges;e++ ){
-            int u=edges[e].src;
-            int v=edges[e].dest;
-            int w=edges[e].weight;
-
-            if (
-                dist[u]!=INT_MAX // u is reachable
-                && dist[u]+w<dist[v]
-            ){
-                cout<<"-ve cycle detected Exitting \n ";
-                return;
-            }
-        }
-
-    // all safe only printing remaining 
-
-    cout<<"Distance from source to vertex \n ";
-    for (int v=0;v<n;v++){
-        cout<<v<<" "<<dist[v]<<endl;
-    }
 }
 
-int main() {
+int main (){
+
+
     // Same graph as the visual above
     // Nodes: A=0, B=1, C=2, D=3, E=4
-    Edge edges[] = {
+    edge edges[] = {
         {0, 1,  6},  // A→B weight  6
         {0, 2,  7},  // A→C weight  7
         {1, 2,  8},  // B→C weight  8
@@ -71,6 +38,6 @@ int main() {
     int numEdges = 8; // total number of edges
 
     bellmanFord(edges, numEdges, 0); // start from A (index 0)
+    
     return 0;
 }
-

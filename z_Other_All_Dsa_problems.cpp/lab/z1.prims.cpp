@@ -22,10 +22,6 @@ int adj[n][n] = {
 void primMST() {
 
 
-// Failed 7 th time
-
-// finally pass 1 time 
-
 }
 
 int main() {

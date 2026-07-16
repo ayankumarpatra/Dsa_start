@@ -21,13 +21,14 @@ void bfs(int start) {
     q.push(start);
 
     while (!q.empty()) {
-        int node = q.front(); q.pop();
+        int node = q.front();
+        q.pop();
         cout << node << " ";
 
-        for (int nb : adj[node])
-            if (!visited[nb]) {
-                visited[nb] = true;
-                q.push(nb);
+        for (int currnode : adj[node])
+            if (!visited[currnode]) {
+                visited[currnode] = true;
+                q.push(currnode);
             }
     }
 }
