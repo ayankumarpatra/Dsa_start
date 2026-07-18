@@ -1,15 +1,13 @@
 #include<iostream>
 #include<stack>
-#include<queue>
 #include<vector>
-#include<algorithm>
 
 using namespace std ;
 
-int partition(int arr[], int lowerbound, int upperbound){
-    int pivot=arr[lowerbound];
+int partition (int arr[] , int lower_bound,int upper_bound){
+    int pivot=arr[lower_bound];
 
-    int start=lowerbound,end=upperbound;
+    int start=lower_bound,end=upper_bound;
 
     while (start<end)
     {
@@ -17,33 +15,31 @@ int partition(int arr[], int lowerbound, int upperbound){
         {
             start++;
         }
+
         while (arr[end]>pivot)
         {
             end--;
         }
-        
+
         if (start<end){
             swap(arr[start],arr[end]);
         }
     }
-
-    swap(arr[lowerbound],arr[end]);
-
+    swap(arr[lower_bound],arr[end]);
     return end;
-
 }
 
-void quicksort(int arr[], int low , int high){
-    if (low<high){
-        int pos=partition(arr,low,high);
-        quicksort(arr,low,pos-1);
-        quicksort(arr,pos+1,high);
+
+void quicksort(int arr[],int lower_bound, int upper_bound){
+    if (lower_bound<upper_bound){
+        int pos=partition(arr,lower_bound,upper_bound);
+        quicksort(arr,lower_bound,pos-1);
+        quicksort(arr,pos+1,upper_bound);
     }
 }
 
 
 int main (){
-
     int n;
 
     cout << "Enter number of elements: ";
@@ -67,6 +63,5 @@ int main (){
     for(int i = 0; i < n; i++) {
         cout<< arr[i]<<" ";
     }
-        
     return 0;
 }
