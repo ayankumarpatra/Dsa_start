@@ -11,36 +11,23 @@ class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
         
-        int count=0;
-        // have to return the number of subarr only 
-
-        // no brain standard brute force approach
-
-        queue<int> q;
-
-        int qsum=0;
+        int count=0,currsum=0;
+        // brutefore , only bruteforce :) no knight thinking at first
 
         for (int i=0;i<nums.size();i++){
-
-            qsum+=nums[i];
-            q.push(nums[i]);
-
-            if (qsum==k){
+            currsum=0;
+        for (int j=i;j<nums.size();j++){
+            currsum+=nums[i];
+            if (currsum==k){
                 count++;
             }
-
-            while (qsum>k){
-                qsum-=q.back();
-                q.pop();
+            else if(currsum>k){
+                break;
             }
-
-            if (qsum<0){
-                qsum=0;
-            }
+         }
         }
 
         return count;
-
     }
 };
 
