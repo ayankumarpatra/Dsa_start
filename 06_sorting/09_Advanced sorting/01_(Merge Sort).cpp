@@ -40,6 +40,7 @@ void merge_sort(vector<int>& v){
         if (n==1){
             return;
         }
+        
     int n1=(n/2),n2=n-(n/2);
     vector<int> a(n1),b(n2);
 
