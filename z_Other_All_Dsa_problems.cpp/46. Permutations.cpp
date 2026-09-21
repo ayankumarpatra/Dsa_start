@@ -1,6 +1,6 @@
 #include<iostream>
 #include<stack>
-#include<queue>
+#include<unordered_set>
 #include<vector>
 #include<algorithm>
 
@@ -9,33 +9,48 @@ using namespace std ;
 
 class Solution {
 public:
+    // for loop + recursive approach 
 
-    void helper (int start, int &n, int k , vector<int> temp , vector<vector<int>> &returnvect) {
-        if (k==0){
+    int n;
+    unordered_set<int> st;
+
+    void helper (vector<int> &temp , vector<vector<int>>& returnvect ,const vector<int>& nums){
+        // if the curr temp size is equal to n , means we have made a permutation and we can push to it 
+
+        if ( temp.size()==n){
             returnvect.push_back(temp);
             return;
         }
 
-        if (start>n){
-            return;
+
+        for (int i=0;i<n;i++){
+            if (st.find(nums[i])==st.end()){// if the current element not in set 
+
+                // if taking the current element 
+                st.insert(nums[i]);
+                temp.push_back(nums[i]);
+                helper(temp,returnvect,nums);
+
+                // Backtrack: undo the current choice
+                st.erase(nums[i]);
+                temp.pop_back();
+            }
         }
-
-        // taking current element
-        temp.push_back(start);
-        helper(start+1,n,k-1,temp,returnvect);
-
-        // excluding start , thinking other possibilities 
-        temp.pop_back();
-        helper(start+1,n,k,temp,returnvect);
     }
 
-    vector<vector<int>> combine(int n, int k) {
-        vector<int> temp;
-        vector<vector<int>> returnvect;
+    vector<vector<int>> permute(vector<int>& nums) {
 
-        helper(1,n,k,temp,returnvect);
+        vector<int> temp;
+        vector<vector<int>>returnvect;
+
+        n=nums.size();
+
+        helper(temp,returnvect,nums);
+        
+        return returnvect;
     }
 };
+
 
 int main (){
 
