@@ -6,24 +6,30 @@
 
 using namespace std ;
 
-
 class Solution {
 public:
-    int findContentChildren(vector<int>& g, vector<int>& s) {
-        int total =0;
+    int findContentChildren(vector<int>& child, vector<int>& cookies) {
+        // sort + 2 pointer 
 
-        for (int currnum : s){
-            total+=currnum;
+        sort (child.rbegin(),child.rend());
+
+        sort (cookies.rbegin(),cookies.rend());
+
+        int child_index=0,cookies_index=0,eaten=0;
+
+        while (child_index<child.size() && cookies_index<cookies.size()  )
+        {
+            if (child[child_index] <= cookies[cookies_index]){
+                cookies_index++;
+                eaten++;
+            }
+            child_index++;
         }
 
-        sort (g.begin(),g.end());
-
-        for (int i=0; i<g.size() ;i++){
-            
-        }
+        return eaten;
+        
     }
 };
-
 
 int main (){
 
