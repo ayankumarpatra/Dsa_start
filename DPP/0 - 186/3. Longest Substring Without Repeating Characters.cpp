@@ -13,21 +13,25 @@ public:
         
         int last_removed=0;
 
-        unordered_set<int> us;
+        unordered_set<char> us;
 
         int currlen=0,maxlen=0,curr_elements;
 
         for (int i=0;i<s.size();i++){
             curr_elements=us.size();
-            us.insert(s[i]);
-            if (us.size()==curr_elements){
-                while (us.size() == curr_elements && us.size()!=0)
+            if (us.contains(s[i])){
+                while (us.contains(s[i]) && us.size()!=0)
                 {
-                    
+                    us.erase(s[last_removed++]);
                 }
-                
             }
+            
+            us.insert(s[i]);
+
+            maxlen = max (maxlen,int(us.size()));
         }
+
+        return maxlen;
         
     }
 };
