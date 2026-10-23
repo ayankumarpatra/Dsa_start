@@ -48,6 +48,34 @@ public:
     }
 };
 
+// retry 
+
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        // m = elements in num 1 n n = element in num 2 
+
+        // both are sorted in ascending order ;
+        // so here we will just put the elements 1 by 1 but from last in nums 1 
+        // as nums size is m +n 
+
+        int point_1=m-1, point_2=n-1;
+        int point_main=m+n-1;
+
+        while ( point_2>=0 ) // till the 2nd vector got empty as both are sorted 
+        // so when we merge till the 2nd vector , remaining will be sorted 
+        {
+            if ( point_1 >=0 && nums1[point_1]>nums2[point_2]){
+                nums1[point_main --]=nums1[point_1--];
+            }
+            else{
+                nums1[point_main --]=nums2[point_2--];
+            }
+        }
+        
+    }
+};
+
 
 int main (){
 
