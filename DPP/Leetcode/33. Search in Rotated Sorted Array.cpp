@@ -21,18 +21,31 @@ public:
                 return mid;
             }
 
-            /*
-            else check the left side if sorted and element may there ; see left side will be sorted for sure
-            sorted in ascending order and possibly left rotated at an unknown index
-            */
+            // check if the left side is sorted 
+
+            if (nums[start] <= nums [mid]){
+                // check if the nums present in the sorted left side 
+                // eg start -> mid
+                if ( nums[start] <= target  && target<= nums[mid]){
+                    end = mid -1 ; // move the end to search the left side only
+                }
+                else {
+                    start = mid +1;
+                    // else move the start to search the right side 
+                }
+            }
             
-            else if ( target>=nums[start] && target<= nums[mid] ){
-                end = mid - 1;
+            else {
+                // else right side must be sorted 
+                // eg mid -> end 
+                if ( nums[mid]<= target && target <= nums[end]){
+                    start = mid + 1 ; // move start to find the right side 
+                }
+                else {
+                    end = mid -1 ;
+                }
             }
 
-            else {
-                start = mid + 1;
-            }
         }
 
 
