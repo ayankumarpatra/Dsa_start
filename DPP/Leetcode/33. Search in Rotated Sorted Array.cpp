@@ -45,7 +45,6 @@ public:
                     end = mid -1 ;
                 }
             }
-
         }
 
 
