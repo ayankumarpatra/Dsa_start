@@ -15,9 +15,6 @@ class ListNode {
 /*
 failed attempt 1 
 
-
-
-
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
@@ -131,6 +128,82 @@ public:
 
         return returnnode->next;
 
+    }
+};
+
+
+
+// try 2
+
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        
+        int carry = 0 ,currsum=-1;
+
+        ListNode *returnhead = new ListNode(-1);
+
+        ListNode *curradd_node = returnhead;
+
+        while (l1!=NULL && l2!=NULL){
+           currsum = l1->val + l2->val + carry;
+
+           carry = currsum / 10;
+           currsum = currsum%10 ;
+
+           ListNode * temp_node = new ListNode(currsum);
+
+           curradd_node->next = temp_node;
+           curradd_node = temp_node;
+
+            l1 = l1->next;
+            l2 = l2->next;
+        }
+        
+        // add l1 if remaining 
+        
+        while (l1!=NULL){
+            currsum = l1->val + carry;
+            carry = currsum / 10;
+           currsum = currsum%10 ;
+
+           ListNode * temp_node = new ListNode(currsum);
+
+            curradd_node->next = temp_node;
+            curradd_node = temp_node;
+
+            l1 = l1->next;
+        }
+
+        // add l2 if remaining 
+        
+        while (l2!=NULL){
+            currsum = l2->val + carry;
+           carry = currsum / 10;
+           currsum = currsum%10 ;
+
+           ListNode * temp_node = new ListNode(currsum);
+            
+            curradd_node->next = temp_node;
+            curradd_node = temp_node;
+            l2 = l2->next;
+        }
+
+        while (carry>0)
+        {
+            currsum = carry;
+           carry = currsum / 10;
+           currsum = currsum%10 ;
+
+           ListNode * temp_node = new ListNode(currsum);
+
+            
+            curradd_node->next = temp_node;
+            curradd_node = temp_node;
+        }
+        
+
+        return returnhead->next;
     }
 };
 
