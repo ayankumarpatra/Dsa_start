@@ -74,25 +74,6 @@ public:
 
 
 
-/*
-                    if ( abs (curr_asteroid)  > abs (returnvect.back()) ){
-                        returnvect.pop_back();
-                    }
-
-                    else if ( abs (curr_asteroid)  == abs (returnvect.back()) ){
-                        curr_asteroid=0;
-                        returnvect.pop_back();
-                        break;
-                    }
-                    else{
-                        curr_asteroid=0;
-                        break;
-                    }
-
-*/
-
-
-
 int main (){
 
     
