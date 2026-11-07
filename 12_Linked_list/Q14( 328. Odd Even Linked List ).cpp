@@ -43,6 +43,51 @@ public:
     }
 };
 
+
+// self try later 
+
+class Solution {
+public:
+    ListNode* oddEvenList(ListNode* head) {
+            if (head == NULL){
+                return NULL;
+            }
+        ListNode* oddhead = head;
+            head = head->next;
+
+            if (head == NULL){
+                return head;
+            }
+
+        ListNode* evenhead = head ;
+            head = head->next;
+
+        ListNode* currodd = oddhead;
+        ListNode* curreven = evenhead;
+        
+        int i= 1;
+
+        while ( head!=NULL )
+        {
+            if (i&1){
+                currodd->next=head;
+                currodd = currodd->next;
+            }
+            else {
+                curreven->next=head;
+                curreven = curreven->next;
+            }
+        }
+        
+        currodd->next = evenhead;
+        
+        curreven->next = NULL;
+
+        return oddhead;
+        
+    }
+};
+
 int main (){
 
 
