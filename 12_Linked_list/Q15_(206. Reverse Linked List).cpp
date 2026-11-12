@@ -58,6 +58,40 @@ public:
     }
 };
 
+
+
+// self try
+
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+
+    // 3 nodes , front , back , curr = head 
+    if (head == NULL){
+        return head;
+    }
+
+    ListNode * curr = head;
+    ListNode * front = curr->next;
+    ListNode * back = NULL;
+
+    if ( front== NULL){ return curr; }
+
+    while (front!=NULL)
+    {
+        front = curr->next;
+
+        curr->next = back;
+        back = curr;
+
+        curr = front;
+    }
+    
+    return curr;
+
+    }
+};
+
 int main (){
 
 

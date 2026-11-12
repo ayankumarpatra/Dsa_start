@@ -9,27 +9,30 @@ using namespace std ;
 
 class Solution {
 public:
+    double getpow_val ( double x , long long int n){
+        if ( n==0 ){
+            return 1;
+        }
+
+        double temp = getpow_val(x, n/2);
+
+        if ( n%2 == 0 ){
+            return temp*temp;
+        }
+
+        else {
+            return x*temp*temp;
+        }
+    }
+
     double myPow(double x, int n) {
-        bool getneg = false;
 
-        if (n<0){
-            getneg = true;
-            n*= (-1);
-        }
+    if (n<0){
+        return 1 / getpow_val(x , (long long)n );
+    }
 
-        double ret=1;
 
-        while (n>0)
-        {
-            ret*= x;
-            n--;
-        }
-
-        if (getneg){
-            return 1/ret;
-        }
-
-        return ret;
+    return getpow_val(x , (long long)n );
         
     }
 };
