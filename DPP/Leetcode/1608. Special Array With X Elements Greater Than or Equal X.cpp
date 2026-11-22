@@ -12,10 +12,33 @@ public:
     int specialArray(vector<int>& nums) {
         sort (nums.begin(),nums.end());
 
-        for (int i =0 ; i<nums.size();i++){
-            if (nums[i]!=0){
-                if (nums[i] == nums.size() - i -1){
-                    return nums[i];
+        int numidx = 0 , max_val = nums[nums.size()-1];
+        
+
+        for (int i = 0 ; i<max_val ; i++){
+
+            if (nums[numidx] == 0) {  // getting the first non zero idx , but keeping i constant to check
+                // fot the values lower than arr[0] if applicable 
+                numidx ++;
+                i--;
+                continue;
+            }
+
+            if (numidx<nums.size() ){ 
+                // we can get elements till the last index
+
+                if ( i<= nums[numidx] ){
+                    if (i == nums.size() - numidx ){
+                        return i;
+                    }
+
+                    else if (nums[numidx] == nums.size() - numidx ){
+                        return nums[numidx];
+                    }
+                }
+                else{
+                    numidx++;
+                    i--;
                 }
             }
         }
